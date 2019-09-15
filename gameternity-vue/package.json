@@ -1,8 +1,8 @@
 {
-  "name": "brickex-frx",
+  "name": "gameternity",
   "version": "0.0.1",
-  "description": "BrickEX tokenizer for real estate",
-  "author": "Héctor Linares <hlinares@brickex.io>",
+  "description": "Gameternity games decentralized marketplace",
+  "author": "Héctor Linares <hlinares@bluecodesolutions.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -15,6 +15,9 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
     "postinstall": "node node_modules/phantomjs-prebuilt/install.js"
   },
+  "settings": {
+    "import/resolver": "webpack"
+  },
   "dependencies": {
     "@aeternity/aepp-sdk": "^4.7.0",
     "alertifyjs": "^1.11.1",
@@ -22,6 +25,7 @@
     "axios-progress-bar": "^1.2.0",
     "ckeditor": "^4.11.1",
     "date-fns": "^1.29.0",
+    "eslint-import-resolver-webpack": "^0.11.1",
     "html2canvas": "^1.0.0-rc.3",
     "jspdf": "^1.5.3",
     "prerender-spa-plugin": "^3.4.0",
@@ -98,7 +102,7 @@
     "vue-style-loader": "^3.1.2",
     "vue-template-compiler": "^2.5.16",
     "webpack": "^3.12.0",
-    "webpack-bundle-analyzer": "^2.11.1",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-dev-middleware": "^1.12.2",
     "webpack-hot-middleware": "^2.22.1",
     "webpack-merge": "^4.1.2"
