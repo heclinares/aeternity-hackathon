@@ -4,7 +4,9 @@ Frontend to connect to the Shop contract.
 
 ## INSTALL
 Execute:
+
 yarn
+
 yarn run dev
 
 ## VIEWS

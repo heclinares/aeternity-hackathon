@@ -4,8 +4,11 @@ Proof of concept of a decentralized marketplace for videogames. Tested some proc
 
 ## INSTALL
 To test the system, install the frontend:
+
 cd gameternity-vue
+
 yarn
+
 yarn run dev
 
 ## CONTRACTS
