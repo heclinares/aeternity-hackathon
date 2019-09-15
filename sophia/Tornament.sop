@@ -1,0 +1,45 @@
+
+contract Tournament =
+
+  record state = {
+    owner            : address,
+    game             : address,
+    player1          : map(int, address),
+    player2          : map(int, address),
+    results          : map(int, address),
+    numResults       : int}
+
+  stateful entrypoint init(g : address) = {
+    owner = Call.caller,
+    game = g,
+    player1 = {},
+    player2 = {},
+    results = {},
+    numResults = 0}
+
+//Getters
+  entrypoint who_won (num : int) : address =
+    state.results[num]
+
+//Setters
+  stateful entrypoint add_result(winner : address, player1 : address, player2 : address) = 
+    only_owner()
+    put(state{player1[state.numResults] = player1, player2[state.numResults] = player2, results[state.numResults] = winner,numResults = add(state.numResults, 1)})
+
+//Aux functions
+  private function add(a : int, b : int) : int =
+    let c : int = a + b
+    require(c >= a, "Error")
+    c
+
+  private function require'(b : bool, err : string) =
+    if(!b)
+      abort(err)
+
+  private function only_owner() =
+    require'(Call.caller == state.owner, "Only owner can mint!")
+
+  private function lookup_by_address(k : address, m, v) =
+  	switch(Map.lookup(k, m))
+	    None    => v
+	    Some(x) => x
