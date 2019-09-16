@@ -59,15 +59,20 @@
         </div>
         <div class="row games-container">
           <div class="col-md-6" v-for="game in games">
-            <a :href="game.url" title="game.name" class="text-center game-card width-100">
+            <div class="text-center game-card width-100">
               <div class="game-name">
                 {{ game.name }} <br><small class="text-uppercase"></small>
               </div>
               <img alt="" :src="game.img" class="lazyload">
-            </a>
-            <div style="width: 150px; height: 50px; position: absolute; left: 20px; bottom: 20px; color: #eee; font-size: 15px; background: rgba(100,100,100,0.5); border-radius: 24px;">
+            </div>
+            <div @click="tryBuy(game)" style="cursor: pointer; z-index: 2;width: 150px; height: 50px; position: absolute; left: 20px; bottom: 20px; color: #eee; font-size: 15px; background: rgba(100,100,100,0.5); border-radius: 24px;">
               <img src="/static/img/Aeternity.svg" style="width: 50px"> {{ game.price }} AE
             </div>
+            <a :href="game.url" :title="game.name" class="" v-if="game.balance > 0">
+              <div style="cursor: pointer; z-index: 2;width: 170px; padding: 10px; height: 50px; position: absolute; right: 20px; bottom: 20px; color: #eee; font-size: 15px; background: rgba(100,100,100,0.5); border-radius: 2px;">
+                <img src="/static/img/icons8-checked-32.png" /> In your library
+              </div>
+            </a>
           </div>
         </div>
       </div>
@@ -77,7 +82,7 @@
 
 <script>
   import Vue from 'vue'
-  import { getGameList, gameContract, call } from '@/Common/contract'
+  import { getGameList, gameContract, call, setWaellet, isWaellet, buyGame, getUserAddress } from '@/Common/contract'
 
   export default {
     name: 'home',
@@ -92,6 +97,13 @@
       }
     },
     methods: {
+      tryBuy: function (game) {
+        if (isWaellet()) {
+          buyGame(game)
+        } else {
+          alert('You need Waellet to use this feature!')
+        }
+      }
     },
     mounted () {
     },
@@ -106,24 +118,36 @@
         for (var i in list.decodedResult) {
           console.log(list.decodedResult[i][1])
           let j = i
-          call(gameContract, 'get_name', [], list.decodedResult[j][1]).then((gameName) => {
+          var gameAddress = list.decodedResult[j][1]
+          this.games[j].address = gameAddress
+          call(gameContract, 'get_name', [], gameAddress).then((gameName) => {
             Vue.set(this.games, j, {...this.games[j], ...{ name: gameName.decodedResult }})
             console.log(gameName.decodedResult)
           })
-          call(gameContract, 'get_image', [], list.decodedResult[j][1]).then((gameImg) => {
+          call(gameContract, 'get_image', [], gameAddress).then((gameImg) => {
             Vue.set(this.games, j, {...this.games[j], ...{ img: gameImg.decodedResult }})
             console.log(gameImg.decodedResult)
           })
-          call(gameContract, 'get_url', [], list.decodedResult[j][1]).then((gameUrl) => {
+          call(gameContract, 'get_url', [], gameAddress).then((gameUrl) => {
             Vue.set(this.games, j, {...this.games[j], ...{ url: gameUrl.decodedResult }})
             console.log(gameUrl.decodedResult)
           })
-          call(gameContract, 'get_price', [], list.decodedResult[j][1]).then((gamePrice) => {
+          call(gameContract, 'get_price', [], gameAddress).then((gamePrice) => {
             Vue.set(this.games, j, {...this.games[j], ...{ price: gamePrice.decodedResult }})
             console.log(gamePrice.decodedResult)
           })
+          call(gameContract, 'balance_of', [getUserAddress()], gameAddress).then((balance) => {
+            Vue.set(this.games, j, {...this.games[j], ...{ balance: balance.decodedResult }})
+            console.log(balance.decodedResult)
+          })
         }
       })
+      if (typeof window.Aepp !== 'undefined') {
+        window.Aepp.request.connect().then(result => {
+          console.log('Waellet connected!')
+          setWaellet()
+        })
+      }
     }
   }
 </script>

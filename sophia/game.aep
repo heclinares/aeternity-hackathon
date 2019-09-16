@@ -22,7 +22,6 @@ contract Game =
     price = p,
     id = id2}
 
-//Getters
   entrypoint total_supply() : int = state.total_supply
 
   entrypoint balance_of(who: address) : int = lookup_by_address(who, state.balances, 0)
@@ -39,7 +38,6 @@ contract Game =
 
   entrypoint get_id() : string = state.id
 
-//Setters
   stateful entrypoint set_image(i : string) = 
     only_owner()
     put(state{img = i})
@@ -64,10 +62,9 @@ contract Game =
     only_owner()
     put(state{id = i})
 
-//Game functions
   stateful entrypoint buyGame() =
     if(Call.value >= state.price)
-        transfer'(Call.caller, state.owner, 1)
+        mint(Call.caller, 1)
     else
         Chain.spend(Call.caller, Call.value)
         abort("Can't pay the game, funds")
@@ -76,7 +73,6 @@ contract Game =
     only_owner()
     Chain.spend(Call.caller, Contract.balance)
 
-//Token functions
   stateful entrypoint transfer(to: address, value: int) : bool =
     transfer'(Call.caller, to, value)
 
@@ -90,14 +86,12 @@ contract Game =
 
     true
 
-  stateful entrypoint mint(account: address, value: int) : bool =
-    only_owner()
+  stateful private function mint(account: address, value: int) : bool =
     put(state{total_supply = add(state.total_supply, value),
       balances[account] = add(balance_of(account), value)})
 
     true
 
-//Aux functions
   private function add(a : int, b : int) : int =
     let c : int = a + b
     require(c >= a, "Error")
