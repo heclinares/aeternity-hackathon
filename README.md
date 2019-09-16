@@ -1,6 +1,10 @@
 # GAMETERNITY PROJECT
 
-Proof of concept of a decentralized marketplace for videogames. Tested some processes to create a login process for non-blockchain backends, using private/public key signature and random generated tokens.
+Our goal is to adapt the video game industry to Blockchain technology. Games industry relays in lot of processes than can be adapted to Blockchain, making them fairer, efficient and specially, more transparent. Having so many possibilities, for this hackathon we have focused on:
+
+    Proof of concept of a decentralized marketplace for videogames
+    Tested some processes to create a login process for non-blockchain backends, using private/public key signature and random generated tokens
+    First version of an eSports tournament record smart contract
 
 ## INSTALL
 To test the system, install the frontend:
