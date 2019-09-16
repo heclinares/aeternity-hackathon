@@ -7,6 +7,8 @@ Our goal is to adapt the video game industry to Blockchain technology. Games ind
     Tested some processes to create a login process for non-blockchain backends, using private/public key signature and random generated tokens
     First version of an eSports tournament record smart contract
 
+Warning: old game contract version has a bug in the buyGame function, to test this function, deploy a new game or use the last one, that was uploaded after the fix
+
 ## INSTALL
 To test the system, install the frontend:
 
