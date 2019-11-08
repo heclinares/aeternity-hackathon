@@ -5,7 +5,10 @@
         "browsers": ["last 2 versions", "> 5% in FR"],
         "uglify": true
       },
-      "modules": false
+      "modules": false,
+      "compilerOptions": {
+        "target": "es6"
+      }
     }]
   ],
   "plugins": [

@@ -4,13 +4,29 @@
     <header class="top-header hidden-xs" id="top" :style="'position: absolute; top: 0; z-index: 2; background-color: ' + headerColor + '; width: 100%;'">
       <div class="container" style="width: 100%; max-width: 100%;">
         <div class="row">
-          <div class="col-xs-12 col-sm-2" style="margin-left: 8%; padding-left: 20px;">
+          <div class="col-xs-12 col-sm-2" style="margin-left: 8%; padding-left: 10px;">
             <div class="list-inline">
-              <h2 style="text-decoration: initial; color: #ff0d6a; margin-top: 20px;">Gameternity</h2>
+              <h2 style="text-decoration: initial; color: #ff0d6a; margin-top: 20px;">
+                <router-link
+                  :to="{name: 'home'}"
+                  class="sign-in"
+                  active-class="active">
+                  <img src="/static/img/gtz-logo-white.png" style="width: 50px"/>
+                </router-link>
+              </h2>
             </div>
           </div>
           <div class="col-xs-12 col-sm-8 text-right">
             <ul class="top-social-media" style="margin-top: 17px">
+              <li>
+                <router-link
+                  :to="{name: 'how-it-works'}"
+                  class="sign-in"
+                  style="background: transparent;padding: 15px 20px;color: rgb(255, 13, 106);border: 0px solid #fff;"
+                  active-class="active">
+                  <i class="fa fa-key"></i> How it works
+                </router-link>
+              </li>
               <li>
                 <router-link
                   :to="{name: 'login'}"
@@ -85,6 +101,7 @@
 
 <script>
 import Home from '@/Views/Home'
+import HowItWorks from '@/Views/HowItWorks'
 import footerComp from '@/Components/Footer'
 
 export default {
@@ -103,6 +120,7 @@ export default {
   },
   components: {
     Home,
+    HowItWorks,
     footerComp
   },
   created: function () {

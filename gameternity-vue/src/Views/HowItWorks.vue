@@ -9,30 +9,15 @@
             <div class="carousel-caption banner-slider-inner banner-top-align col-sm-10" style="position: relative; margin-top: 4%">
               <div class="top-content-container text-left" style="margin-left: 10%">
                 <!-- TITLE, SUBTITLE ZONE -->
-                <h1 style="color: #fff; text-shadow: none;" data-animation="animated fadeInDown delay-05s">Decentralized game market</h1>
-                <h2 style="color: #fff; text-shadow: none;">Game market place for all</h2>
-                
-                <!-- SEARCH BAR -->
-                <div class="full-width-form" style="margin-top: 165px">
-                  <form id="search-bar" style="font-family: montserrat; border-radius: 3px; height: 60px; background: #fff; color: #444; position:relative; overflow: hidden;" >
-                    
-                    <div class="span_search" style="display: inline-block; width: 80%; height: 55px;vertical-align: top; padding-top: 0px;">
-                      <input @focus="showResults=true" @blur="showResults=false" type="text" placeholder="Search by game title, company or keyword" id="camp_search" v-model="search" style="width: 100%; padding-right: 20px; height: 53px; font-size: 14px; vertical-align: middle; padding-left: 10px;">
-                    </div>
-                    
-                    <button type="button" class="btn btn-info" style="background: rgb(255, 13, 106); border-color: #fff;
-                      text-transform: uppercase;font-weight: bold;padding: 2px;margin-bottom: 2px; border-radius: 0 3px 3px 0;
-                      position:absolute; right: 0; height: 58px; top: 0; padding-right: 20px; padding-left: 20px; font-size: 14px;
-                      font-weight: 0;" 
-                      v-on:click="searchCampaigns()">
-                        Search
-                    </button>
-                  </form>
-                  <!-- SEARCH BAR RESULTS -->
-                  <div class="search-results" style="background: #fff; color: #444;" v-if="showResults">
-                    <div class="search-entity" v-for="game in games" style="">
-                      <img :src="game.img" style="width: 100px;"/> {{ game.name }}
-                    </div>
+                <h1 style="color: #fff; text-shadow: none; text-align: center;" data-animation="animated fadeInDown delay-05s">HOW IT WORKS</h1>
+                <div class="row" style="margin-top: 100px;">
+                  <div class="col-12 col-md-6">
+                    <h2 style="color: #fff; text-shadow: none;" class="text-center">For GAMERS</h2>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/CHgZ2YQOgso" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <h2 style="color: #fff; text-shadow: none;" class="text-center">For DEVELOPERS</h2>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/3SH3CPJhthE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                   </div>
                 </div>
               </div>

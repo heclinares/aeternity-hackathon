@@ -2,10 +2,10 @@
   <div class="auth-page">
     <div class="container page">
       <div class="row">
-        <div class="col-md-6 offset-md-3 col-xs-12 box-container">
+        <div class="col-md-6 offset-md-3 col-xs-12 box-container" style="margin-top: 6%">
           <router-link :to="{ name: 'home' }">
             <div class="text-center">
-              <h1 style="text-decoration: initial; color: #ff0d6a; margin-bottom: 40px;">Gameternity</h1>
+              <h1 style="text-decoration: initial; color: #ff0d6a; margin-bottom: 40px;"><img src="/static/img/gtz-logo-white.png" style="width: 50px"/></h1>
             </div>
           </router-link>
           <div class="white-box">

@@ -12,6 +12,12 @@ export default new Router({
       component: () => import('@/Views/Common/PublicMain')
     },
     {
+      name: 'how-it-works',
+      path: '/how-it-works',
+      props: { comp: 'HowItWorks' },
+      component: () => import('@/Views/Common/PublicMain')
+    },
+    {
       name: 'logout',
       path: '/logout',
       component: () => import('@/Views/Logout')

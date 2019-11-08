@@ -44,6 +44,7 @@ var publicViews = [
   'register',
   'login',
   'home',
+  'how-it-works',
   'public-list',
   'public-detail',
   'public-agency-detail',
