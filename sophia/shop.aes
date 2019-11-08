@@ -37,3 +37,5 @@ contract Shop =
     let c : int = a + b
     require(c >= a, "Error")
     c
+  
+  stateful entrypoint getOwner() : address = state.owner
