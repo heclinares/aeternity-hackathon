@@ -34,7 +34,8 @@ class ApiPublicController extends Controller
       $user->setToken($token);
       
       // Send token in the response
-      $this->reponse['response'] = $token;
+      $this->response['response'] = $token;
+      $this->response['error'] = false;
       
       $em->persist($user);
     } else {
