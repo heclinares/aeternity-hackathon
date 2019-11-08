@@ -17,7 +17,6 @@ contract Shop =
     total_games_user = {}}
 
   stateful entrypoint addGame(g : Game) =
-    only_owner()
     put(state{gamesContracts[state.totalGames] = g, totalGames = add(state.totalGames, 1)})
 
   entrypoint getGames() : map(int, Game) = state.gamesContracts
@@ -27,7 +26,7 @@ contract Shop =
     put(state{games[user][state.total_games_user[user]] = game,total_games_user[user] = add(state.total_games_user[user], 1)})
 
   private function only_owner() =
-    require'(Call.caller == state.owner, "Only owner can mint!")
+    require'(Call.caller == state.owner, "Only owner can call this function")
 
   private function require'(b : bool, err : string) =
     if(!b)
