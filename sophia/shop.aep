@@ -1,0 +1,39 @@
+contract Game =
+  entrypoint total_supply : () => int
+
+contract Shop =
+  record state = {
+    owner             : address,
+    gamesContracts    : map(int, Game),
+    totalGames        : int,
+    games             : map(address, map(int, Game)),
+    total_games_user  : map(address, int)}
+  
+  stateful entrypoint init() = {
+    owner = Call.caller,
+    gamesContracts = {},
+    totalGames = 0,
+    games = {},
+    total_games_user = {}}
+
+  stateful entrypoint addGame(g : Game) =
+    only_owner()
+    put(state{gamesContracts[state.totalGames] = g, totalGames = add(state.totalGames, 1)})
+
+  entrypoint getGames() : map(int, Game) = state.gamesContracts
+
+  stateful entrypoint addGameToUser(user : address, game : Game) = 
+    only_owner()
+    put(state{games[user][state.total_games_user[user]] = game,total_games_user[user] = add(state.total_games_user[user], 1)})
+
+  private function only_owner() =
+    require'(Call.caller == state.owner, "Only owner can mint!")
+
+  private function require'(b : bool, err : string) =
+    if(!b)
+      abort(err)
+
+  private function add(a : int, b : int) : int =
+    let c : int = a + b
+    require(c >= a, "Error")
+    c
