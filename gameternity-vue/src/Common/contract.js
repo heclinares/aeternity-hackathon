@@ -58,13 +58,17 @@ export const getGameList = function () {
       internalUrl: 'https://sdk-testnet.aepps.com',
       compilerUrl: 'https://latest.compiler.aepps.com',
       // `keypair` param deprecated and will be removed in next major release
-      keypair: { secretKey: keypair.secretKey, publicKey: keypair.publicKey },
-      address: keypair.publicKey,
+      // keypair: { secretKey: keypair.secretKey, publicKey: keypair.publicKey },
+      address: userAddress,
       networkId: 'ae_uat' // or any other networkId your client should connect to)
     }).then((resp) => {
       console.log('GAME LIST THEN')
+      console.log(resp)
       // Initialize client Universal
       clientU = resp
+      console.log('Pre instance')
+      console.log(shopContract)
+      console.log(shopAddress)
       // Get the instance of gamelist contract
       clientU.getContractInstance(shopContract, {contractAddress: shopAddress}).then((contResp) => {
         contractU = contResp
@@ -72,6 +76,8 @@ export const getGameList = function () {
           console.log('GAME LIST THEN 2')
           resolve(deployResp)
         })
+      }).catch((error) => {
+        console.log(error)
       })
     })
   })
